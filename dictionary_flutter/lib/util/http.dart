@@ -1,7 +1,5 @@
 import 'package:dictionary_flutter/components/randomC.dart';
-import 'package:dictionary_flutter/util/api_path.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -10,7 +8,7 @@ class HttpService {
 
   static Future getService(word, context) async {
     var response = await http.get(
-        Uri.parse('https://wordsapiv1.p.rapidapi.com/words/${word}'),
+        Uri.parse('https://wordsapiv1.p.rapidapi.com/words/$word'),
         headers: {
           "X-Mashape-Key": '0fe188ce76mshf6a73869a700e63p120506jsn0160ce171b16',
           'X-RapidAPI-Host': 'wordsapiv1.p.rapidapi.com'

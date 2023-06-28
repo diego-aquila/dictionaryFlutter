@@ -27,10 +27,10 @@ class RandomWordsList extends StatelessWidget {
   Widget _buildSuggestions() {
     return GridView.builder(
       scrollDirection: Axis.vertical,
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       itemCount: null,
       itemBuilder: (context, i) {
-        if (i.isOdd) return Divider();
+        if (i.isOdd) return const Divider();
 
         final index = i ~/ 2;
         if (index >= _randomWords.length) {
@@ -54,9 +54,6 @@ class RandomWordsList extends StatelessWidget {
         randomC.wordSearch = word;
         randomC.selectedIndex = 3;
         getWord(word, context);
-
-        print(randomC.selectedIndex);
-        print(randomC.wordSearch);
       },
       child: Card(
         child: Center(
@@ -74,7 +71,7 @@ class RandomWordsList extends StatelessWidget {
 
     if (responseData != null) {
       randomC.responseSave = responseData;
-      print("Deu bom");
+
       Navigator.pushNamed(context, '/showPage');
     }
   }

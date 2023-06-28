@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     const WordList(),
     const History(),
     const Favorites(),
-    ShowWordsPage(),
+    const ShowWordsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -80,7 +80,7 @@ class _MyAppState extends State<MyApp> {
         '/wordlist': (context) => const WordList(),
         '/favorites': (context) => const Favorites(),
         '/history': (context) => const History(),
-        '/showPage': (context) => ShowWordsPage(),
+        '/showPage': (context) => const ShowWordsPage(),
       },
     );
   }
