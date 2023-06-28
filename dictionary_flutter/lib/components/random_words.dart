@@ -4,6 +4,8 @@ import 'package:english_words/english_words.dart';
 import '../util/capitalize.dart';
 import 'package:get/get.dart';
 
+import '../util/http.dart';
+
 void main() {
   runApp(const MaterialApp());
 }
@@ -36,20 +38,24 @@ class RandomWordsList extends StatelessWidget {
             _randomWords.add(element.first);
           });
         }
-        return _buildRow(_randomWords[index]);
+        return _buildRow(context, _randomWords[index]);
       },
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 4, // Define o número de colunas
+        crossAxisCount: 3, // Define o número de colunas
         mainAxisSpacing: 1.0, // Espaçamento vertical entre os itens
         crossAxisSpacing: 1.0, // Espaçamento horizontal entre os itens
       ),
     );
   }
 
-  Widget _buildRow(word) {
+  Widget _buildRow(context, word) {
     return InkWell(
       onTap: () {
         randomC.wordSearch = word;
+        randomC.selectedIndex = 3;
+        getWord(word, context);
+
+        print(randomC.selectedIndex);
         print(randomC.wordSearch);
       },
       child: Card(
@@ -61,5 +67,15 @@ class RandomWordsList extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future getWord(word, context) async {
+    var responseData = await HttpService.getService(word, context);
+
+    if (responseData != null) {
+      randomC.responseSave = responseData;
+      print("Deu bom");
+      Navigator.pushNamed(context, '/showPage');
+    }
   }
 }

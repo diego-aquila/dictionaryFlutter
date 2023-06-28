@@ -1,5 +1,6 @@
 import 'package:dictionary_flutter/routes/favorites.dart';
 import 'package:dictionary_flutter/routes/history.dart';
+import 'package:dictionary_flutter/routes/view_definition_screen.dart';
 import 'package:dictionary_flutter/routes/wordlist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     const WordList(),
     const History(),
     const Favorites(),
+    ShowWordsPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -67,13 +69,18 @@ class _MyAppState extends State<MyApp> {
               icon: Icon(Icons.favorite),
               label: 'Favorites',
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
           ],
         ),
       ),
       routes: {
-        '/wordlist': (context) => WordList(),
+        '/wordlist': (context) => const WordList(),
         '/favorites': (context) => const Favorites(),
         '/history': (context) => const History(),
+        '/showPage': (context) => ShowWordsPage(),
       },
     );
   }
