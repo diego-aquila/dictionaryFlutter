@@ -136,9 +136,11 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
 
   createPartOfSpeechSet() {
     for (var result in randomC.responseSave["results"] ?? []) {
-      String partOfSpeech = result['partOfSpeech'];
-      if (!partOfSpeechSet.contains(partOfSpeech)) {
-        partOfSpeechSet.add(partOfSpeech);
+      if (result['partOfSpeech'] != null) {
+        if (!partOfSpeechSet.contains(result['partOfSpeech'])) {
+          partOfSpeechSet.add(result['partOfSpeech']);
+          print(partOfSpeechSet);
+        }
       }
     }
   }

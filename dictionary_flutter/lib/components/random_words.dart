@@ -71,7 +71,7 @@ class RandomWordsList extends StatelessWidget {
 
     if (responseData != null) {
       randomC.responseSave = responseData;
-
+      print(randomC.responseSave["word"]);
       Navigator.pushNamed(context, '/showPage');
     }
   }
