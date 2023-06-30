@@ -22,8 +22,6 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
     createPartOfSpeechSet();
   }
 
-  // Define o tom da voz (valor padrão: 1.0)
-
   final partOfSpeechSet = [];
   final RandomC randomC = Get.put(RandomC());
 
