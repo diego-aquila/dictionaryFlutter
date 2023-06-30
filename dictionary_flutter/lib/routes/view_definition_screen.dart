@@ -1,8 +1,10 @@
+import 'package:dictionary_flutter/components/add_to_favorites.dart';
 import 'package:dictionary_flutter/util/capitalize.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../components/favoritesC.dart';
 import '../components/randomC.dart';
 
 class ShowWordsPage extends StatefulWidget {
@@ -73,8 +75,9 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
+                const AddToFavorites(),
                 const Text(
                   "Definitions:",
                   style: TextStyle(

@@ -5,6 +5,7 @@ import '../util/capitalize.dart';
 import 'package:get/get.dart';
 
 import '../util/http.dart';
+import 'favoritesC.dart';
 
 void main() {
   runApp(const MaterialApp());
@@ -13,6 +14,7 @@ void main() {
 class RandomWordsList extends StatelessWidget {
   RandomWordsList({super.key});
   final RandomC randomC = Get.put(RandomC());
+  final FavoritesC favoritesC = Get.put(FavoritesC());
   final _randomWords = [];
 
   final _biggerFont = const TextStyle(fontSize: 18.0);
@@ -71,6 +73,7 @@ class RandomWordsList extends StatelessWidget {
 
     if (responseData != null) {
       randomC.responseSave = responseData;
+      favoritesC.isFavorite.value = false;
       print(randomC.responseSave["word"]);
       Navigator.pushNamed(context, '/showPage');
     }

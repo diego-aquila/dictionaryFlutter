@@ -2,10 +2,16 @@ import 'package:dictionary_flutter/routes/favorites.dart';
 import 'package:dictionary_flutter/routes/history.dart';
 import 'package:dictionary_flutter/routes/view_definition_screen.dart';
 import 'package:dictionary_flutter/routes/wordlist.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -23,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   final List<Widget> _screens = [
     const WordList(),
     const History(),
-    const Favorites(),
+    Favorites(),
     const ShowWordsPage(),
   ];
 
@@ -78,7 +84,7 @@ class _MyAppState extends State<MyApp> {
       ),
       routes: {
         '/wordlist': (context) => const WordList(),
-        '/favorites': (context) => const Favorites(),
+        '/favorites': (context) => Favorites(),
         '/history': (context) => const History(),
         '/showPage': (context) => const ShowWordsPage(),
       },
