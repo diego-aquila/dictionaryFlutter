@@ -74,13 +74,9 @@ class _AddToFavoritesState extends State<AddToFavorites> {
           .get()
           .then(
         (querySnapshot) {
-          print("Successfully completed");
-          print(querySnapshot);
-
           for (var docSnapshot in querySnapshot.docs) {
             favoritesC.isFavorite.value =
                 (docSnapshot.id == randomC.wordSearch) ? true : false;
-            print('${docSnapshot.id} => ${docSnapshot.data()}');
           }
         },
         onError: (e) => print("Error completing: $e"),
