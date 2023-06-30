@@ -1,12 +1,13 @@
+import 'package:dictionary_flutter/controllers/homeC.dart';
 import 'package:dictionary_flutter/routes/favorites.dart';
 import 'package:dictionary_flutter/routes/history.dart';
+import 'package:dictionary_flutter/routes/home.dart';
+import 'package:dictionary_flutter/routes/splash.dart';
 import 'package:dictionary_flutter/routes/view_definition_screen.dart';
 import 'package:dictionary_flutter/routes/wordlist.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,69 +25,21 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _screens = [
-    const WordList(),
-    const History(),
-    Favorites(),
-    const ShowWordsPage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
+  final HomeC randomC = Get.put(HomeC());
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Dictionary Flutter',
-      theme: ThemeData(
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          type: BottomNavigationBarType.fixed,
-          // Define o padding dos itens
-        ),
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Dictionary Flutter'),
-        ),
-        body: _screens[_selectedIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          selectedItemColor: Colors.black,
-          selectedFontSize: 18,
-          unselectedItemColor: Colors.white,
-          backgroundColor: Colors.lightBlue,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.list),
-              label: 'Wordlist',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'History',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Favorites',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Favorites',
-            ),
-          ],
-        ),
-      ),
+      home: const SplashScreen(),
+      initialRoute: '/splash',
       routes: {
         '/wordlist': (context) => const WordList(),
         '/favorites': (context) => Favorites(),
-        '/history': (context) => const History(),
+        '/history': (context) => History(),
         '/showPage': (context) => const ShowWordsPage(),
+        '/splash': (context) => const SplashScreen(),
+        '/home': (context) => HomeScreen(),
       },
     );
   }

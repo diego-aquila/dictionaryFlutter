@@ -4,8 +4,7 @@ import 'package:dictionary_flutter/util/capitalize.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../components/favoritesC.dart';
-import '../components/randomC.dart';
+import '../controllers/randomC.dart';
 
 class ShowWordsPage extends StatefulWidget {
   const ShowWordsPage({super.key});

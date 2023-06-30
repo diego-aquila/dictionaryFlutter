@@ -1,11 +1,7 @@
-import 'package:dictionary_flutter/components/randomC.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class HttpService {
-  final RandomC randomC = Get.put(RandomC());
-
   static Future getService(word, context) async {
     var response = await http.get(
         Uri.parse('https://wordsapiv1.p.rapidapi.com/words/$word'),

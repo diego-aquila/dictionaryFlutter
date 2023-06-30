@@ -1,8 +1,7 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dictionary_flutter/components/favoritesC.dart';
-import 'package:dictionary_flutter/components/randomC.dart';
+import 'package:dictionary_flutter/controllers/favoritesC.dart';
+import 'package:dictionary_flutter/controllers/randomC.dart';
+import 'package:dictionary_flutter/util/firebase_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,7 +17,6 @@ class _AddToFavoritesState extends State<AddToFavorites> {
   void initState() {
     super.initState();
     isFavorite();
-    // Chame a função desejada aqui
   }
 
   final FavoritesC favoritesC = Get.put(FavoritesC());
@@ -29,8 +27,8 @@ class _AddToFavoritesState extends State<AddToFavorites> {
     return Obx(
       () => InkWell(
         onTap: (favoritesC.isFavorite.value == false)
-            ? addFavorite
-            : deleteFavorite,
+            ? addFavoriteDB
+            : delfavoriteDB,
         child: Row(
           children: [
             Icon(favoritesC.isFavorite.value == false
@@ -48,40 +46,21 @@ class _AddToFavoritesState extends State<AddToFavorites> {
     );
   }
 
-  Future<void> addFavorite() async {
-    var db = FirebaseFirestore.instance;
-
-    final favorite = {
-      'word': randomC.wordSearch,
-      'json': jsonEncode(randomC.responseSave),
-    };
-
-    try {
-      await db
-          .collection("favorites")
-          .doc(randomC.wordSearch)
-          .set(favorite)
-          .onError((e, _) => print("Error writing document: $e"));
-
-      print('Dados inseridos com sucesso!');
-      favoritesC.isFavorite.value = true;
-    } catch (e) {
-      print('Erro ao inserir dados: $e');
+  delfavoriteDB() async {
+    var response =
+        await FirebaseService.deleteDB(randomC.wordSearch, "favorites");
+    if (response == true) {
+      favoritesC.isFavorite.value = false;
     }
   }
 
-  Future<void> deleteFavorite() async {
-    var db = FirebaseFirestore.instance;
+  addFavoriteDB() async {
+    var response = await FirebaseService.addDB(
+        randomC.wordSearch, randomC.responseSave, "favorites");
 
-    try {
-      await db.collection("favorites").doc(randomC.wordSearch).delete().then(
-            (doc) => print("Document deleted"),
-            onError: (e) => print("Error updating document $e"),
-          );
-      favoritesC.isFavorite.value = false;
-      print('Dados deletados com sucesso!');
-    } catch (e) {
-      print('Erro ao inserir dados: $e');
+    // ignore: unrelated_type_equality_checks
+    if (response == true) {
+      favoritesC.isFavorite.value = true;
     }
   }
 

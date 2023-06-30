@@ -7,9 +7,6 @@ class WordList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Worlist'),
-      ),
       body: Center(
         child: RandomWordsList(),
       ),

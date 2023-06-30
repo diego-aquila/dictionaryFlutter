@@ -1,12 +1,11 @@
 import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../components/favoritesC.dart';
-import '../components/randomC.dart';
-import '../components/random_words.dart';
+import '../controllers/favoritesC.dart';
+import '../controllers/randomC.dart';
 import '../util/capitalize.dart';
+import '../util/messages.dart';
 
 class Favorites extends StatelessWidget {
   Favorites({super.key});
@@ -19,6 +18,7 @@ class Favorites extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           title: const Text('Favorites'),
         ),
         body: StreamBuilder<QuerySnapshot>(
@@ -50,7 +50,7 @@ class Favorites extends StatelessWidget {
                         .doc(document.id)
                         .delete();
 
-                    messageDelete(context);
+                    messageDelete(context, document.id, 'favorites');
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 3),
@@ -73,13 +73,5 @@ class Favorites extends StatelessWidget {
             );
           },
         ));
-  }
-
-  void messageDelete(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Removido dos favoritos'),
-      ),
-    );
   }
 }
