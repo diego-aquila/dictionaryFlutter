@@ -87,8 +87,7 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
                         icon: const Icon(Icons.play_circle_fill),
                         iconSize: 50,
                         onPressed: () {
-                          playAudio(randomC.responseSave[
-                              "word"]); // Substitua "word" pela palavra em inglês que você deseja reproduzir
+                          playAudio(randomC.responseSave["word"]);
                         },
                       ),
                     ],

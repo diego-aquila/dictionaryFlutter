@@ -41,10 +41,8 @@ class Favorites extends StatelessWidget {
                     color: Colors.red,
                     alignment: Alignment.centerRight,
                     child: const Icon(Icons.delete, color: Colors.white),
-                    // padding: EdgeInsets.only(right: 16.0),
                   ),
                   onDismissed: (direction) {
-                    // Ação de exclusão
                     FirebaseFirestore.instance
                         .collection('favorites')
                         .doc(document.id)
