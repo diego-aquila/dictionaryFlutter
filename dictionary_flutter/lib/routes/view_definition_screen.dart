@@ -1,5 +1,6 @@
 import 'package:dictionary_flutter/components/add_to_favorites.dart';
 import 'package:dictionary_flutter/util/capitalize.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,11 +15,14 @@ class ShowWordsPage extends StatefulWidget {
 }
 
 class _ShowWordsPageState extends State<ShowWordsPage> {
+  FlutterTts flutterTts = FlutterTts();
   @override
   void initState() {
     super.initState();
     createPartOfSpeechSet();
   }
+
+  // Define o tom da voz (valor padrão: 1.0)
 
   final partOfSpeechSet = [];
   final RandomC randomC = Get.put(RandomC());
@@ -39,11 +43,12 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
+                  padding: const EdgeInsets.fromLTRB(16, 20, 16, 10),
                   decoration: const BoxDecoration(
                       color: Color(0xFFDEDEDE),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   width: Get.width,
-                  height: 200,
+                  height: 290,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -69,13 +74,33 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
                           fontSize: 25,
                         ),
                       ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "LISTEN TO PRONUNCIATION:",
+                        style: TextStyle(
+                          fontSize: 10,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.play_circle_fill),
+                        iconSize: 50,
+                        onPressed: () {
+                          playAudio(randomC.responseSave[
+                              "word"]); // Substitua "word" pela palavra em inglês que você deseja reproduzir
+                        },
+                      ),
                     ],
                   ),
                 ),
                 const SizedBox(
-                  height: 5,
+                  height: 10,
                 ),
                 const AddToFavorites(),
+                const SizedBox(
+                  height: 20,
+                ),
                 const Text(
                   "Definitions:",
                   style: TextStyle(
@@ -133,6 +158,12 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
         ),
       ),
     );
+  }
+
+  Future<void> playAudio(String word) async {
+    flutterTts.setLanguage("en-US");
+    flutterTts.setSpeechRate(0.2);
+    await flutterTts.speak(word);
   }
 
   createPartOfSpeechSet() {
