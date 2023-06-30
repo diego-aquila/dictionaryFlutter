@@ -18,7 +18,6 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
   void initState() {
     super.initState();
     createPartOfSpeechSet();
-    // Chame a função desejada aqui
   }
 
   final partOfSpeechSet = [];
@@ -141,7 +140,6 @@ class _ShowWordsPageState extends State<ShowWordsPage> {
       if (result['partOfSpeech'] != null) {
         if (!partOfSpeechSet.contains(result['partOfSpeech'])) {
           partOfSpeechSet.add(result['partOfSpeech']);
-          print(partOfSpeechSet);
         }
       }
     }

@@ -7,11 +7,10 @@ import '../controllers/favoritesC.dart';
 import '../controllers/historyC.dart';
 import '../controllers/randomC.dart';
 import '../util/capitalize.dart';
-import '../util/firebase_service.dart';
 import '../util/messages.dart';
 
 class History extends StatefulWidget {
-  History({super.key});
+  const History({super.key});
 
   @override
   State<History> createState() => _HistoryState();
@@ -62,10 +61,8 @@ class _HistoryState extends State<History> {
                 color: Colors.red,
                 alignment: Alignment.centerRight,
                 child: const Icon(Icons.delete, color: Colors.white),
-                // padding: EdgeInsets.only(right: 16.0),
               ),
               onDismissed: (direction) {
-                // Ação de exclusão
                 FirebaseFirestore.instance
                     .collection('historico')
                     .doc(document.id)
@@ -97,20 +94,23 @@ class _HistoryState extends State<History> {
   }
 
   Widget bodyNoHasData() {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        CircularProgressIndicator(),
-        Text(
-          "There is no navigation history between words yet",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF313131),
+    return const Padding(
+      padding: EdgeInsets.all(25.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(),
+          Text(
+            "There is no navigation history between words yet",
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF313131),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -121,7 +121,6 @@ class _HistoryState extends State<History> {
       await db.collection("historico").get().then(
         (querySnapshot) {
           if (querySnapshot.docs == []) {
-            print(querySnapshot.docs);
             historyC.hasHistory.value = false;
           }
         },

@@ -36,10 +36,10 @@ class _MyAppState extends State<MyApp> {
       routes: {
         '/wordlist': (context) => const WordList(),
         '/favorites': (context) => Favorites(),
-        '/history': (context) => History(),
+        '/history': (context) => const History(),
         '/showPage': (context) => const ShowWordsPage(),
         '/splash': (context) => const SplashScreen(),
-        '/home': (context) => HomeScreen(),
+        '/home': (context) => const HomeScreen(),
       },
     );
   }

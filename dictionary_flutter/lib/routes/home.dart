@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -15,11 +15,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeC homeC = Get.put(HomeC());
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
 
   final List<Widget> _screens = [
     const WordList(),
-    History(),
+    const History(),
     Favorites(),
     const ShowWordsPage(),
   ];
